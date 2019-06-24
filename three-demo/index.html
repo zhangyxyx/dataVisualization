@@ -92,6 +92,8 @@ function sphere(){
     var sphereMat=new THREE.MeshLambertMaterial({color:0x0000ff,wireframe:false})
     var sphereMesh=new THREE.Mesh(sphereGeo,sphereMat)
     sphereMesh.position.set(-25,10,0)
+    sphereMesh.castShadow=true
+    sphereMesh.receiveShadow=true
     scene.add(sphereMesh)
 }
 </script>
