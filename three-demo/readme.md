@@ -1,3 +1,8 @@
+#简介
+index.html:  
+直接打开  
+index1.html:  
+http://127.0.0.1:5500/three-demo/index1.html  
 #资料   
 画基本的图形：  
 https://blog.csdn.net/qq_37338983/article/details/78569139  
@@ -5,3 +10,5 @@ https://blog.csdn.net/qq_37338983/article/details/78569139
 https://blog.csdn.net/qq_37338983/article/details/78574039  
 阴影：  
 https://blog.csdn.net/qq_37338983/article/details/78581464  
+添加全景图：
+https://blog.csdn.net/qq_37338983/article/details/82562891
