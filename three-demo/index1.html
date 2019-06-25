@@ -8,10 +8,15 @@
     
     <style>
     body {
-        margin: 0px;
-        overflow: hidden;
+        font-family: Monospace;
+            background: #f0f0f0;
+            margin: 0px;
+            overflow: hidden;
     }
-    
+    div{  
+        background: url(https://threejsfundamentals.org/threejs/resources/images/daikanyama.jpg) no-repeat center center ;
+    }
+
     </style>
 </head>
 <body>
@@ -40,24 +45,14 @@ function main(){
     //长方体
     textureBox()
     //鼠标控制
-    initControls()
+    //initControls()
     //性能参数
-    initStats(container2)
+    //initStats(container2)
     window.addEventListener('resize',onWindowResize,false)
 }
 function initScene(){
     scene=new THREE.Scene()
-    scene.background=new THREE.CubeTextureLoader()
-        .setPath('img/').load(
-            [
-                '1.jpg',
-                '2.jpg',
-                '3.jpg',
-                '4.jpg',
-                '5.jpg',
-                '6.jpg',
-            ]
-        );
+   
 }
 function initCamera(){
     camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight)
@@ -65,17 +60,24 @@ function initCamera(){
     camera.lookAt(new THREE.Vector3(0,0,0))
 }
 function initRenderer(container1){
-    renderer=new THREE.WebGLRenderer({antialias:true})
-    renderer.setClearColor(0x000000,1.0)
+    renderer=new THREE.WebGLRenderer({antiakuas:true,alpha: true})
+    renderer.setClearColor(new THREE.Color(0xffffff),0)//整个画布的背景颜色
     renderer.setSize(window.innerWidth,window.innerHeight)
+    renderer.shadowMapEnabled=true;
     container1.appendChild(renderer.domElement)
 }
 function initLight(){
-    ambientLight=new THREE.AmbientLight(0xffffff,0.35)
+    var ambientLight=new THREE.AmbientLight(0x606060)//自然光
     scene.add(ambientLight)
-    pointLight=new THREE.PointLight(0xffffff)
-    pointLight.position.set(10,10,10)
+    pointLight=new THREE.SpotLight(0xffffff)
+    pointLight.position.set(-200,160,85)
+    pointLight.castShadow=true
     scene.add(pointLight)
+    // ambientLight=new THREE.AmbientLight(0xffffff,0.4)
+    // scene.add(ambientLight)
+    // pointLight=new THREE.PointLight(0xffffff)
+    // pointLight.position.set(10,10,10)
+    // scene.add(pointLight)
 }
 function initControls(){
     controls=new THREE.OrbitControls(camera,renderer.domElement)
@@ -100,11 +102,11 @@ function initStats(container2){
 function onWindowResize(){
     camera.aspect=window,innerWidth/window.innerHeight
     camera.updateProjectionMatrix()
-    renderer.setSize(window.innerWidth,window.innerHeight)
+    renderer.setSize(window.innerWidth,window.innerHeight) 
 }
 function render(){
-    controls.update()
-    stats.update()
+    //controls.update()
+    //stats.update()
     requestAnimationFrame(render)
     renderer.render(scene,camera)
 }

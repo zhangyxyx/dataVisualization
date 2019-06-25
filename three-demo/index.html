@@ -12,6 +12,9 @@
             margin: 0px;
             overflow: hidden;
         }
+    div{  
+        background: url(https://threejsfundamentals.org/threejs/resources/images/daikanyama.jpg) no-repeat center center ;
+    }
     </style>
 </head>
 <body>
@@ -34,8 +37,8 @@ function main(){
     camera.position.set(100,300,100)//相机位置
     camera.lookAt(new THREE.Vector3(0,0,0))//相机观看物体的位置
     //渲染整个场景
-    renderer=new THREE.WebGLRenderer({antiakuas:true})
-    renderer.setClearColor(new THREE.Color(0x000000))//整个画布的背景颜色
+    renderer=new THREE.WebGLRenderer({antiakuas:true,alpha: true})
+    renderer.setClearColor(new THREE.Color(0xffffff),0)//整个画布的背景颜色
     renderer.setSize(window.innerWidth,window.innerHeight)
     renderer.shadowMapEnabled=true;
     container.appendChild(renderer.domElement)
