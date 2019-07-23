@@ -27,15 +27,7 @@
     <div id="stats-output"></div>
     <div id="map-wrapper"></div>
     <div id="map-label"></div>
-    <!-- <script src="./js/jquery-1.9.1.min.js"></script>
-    <script src="./js/d3.js"></script>
-    <script src="./js/d3threeD.js"></script>
-
-    <script src="./js/three.js"></script>
-    <script src="./js/OrbitControls.js"></script>
-    <script src="./js/stats.js"></script>
-    <script src="./js/geojson.js"></script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/97/three.min.js"></script> -->
+    <script src="./js/jquery-1.9.1.min.js"></script>
     <script src="./js/three.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js"></script>
     <script src="https://d3js.org/d3-array.v1.min.js"></script>
@@ -43,7 +35,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.3.5/Tween.min.js"></script>
     <script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
     <script src="https://resource.jacelyn.fish/blog/js/d3threeD.js"></script>
-    <script src="https://resource.jacelyn.fish/blog/js/guangdong-geo.js"></script> 
+    <!-- <script src="https://resource.jacelyn.fish/blog/js/guangdong-geo.js"></script>  -->
+    <script src="./js/geojson.js"></script>
 <script>
 let camera,scend,renderer,raycaster,selectedObject,label
 let minExtrude=30,maxExturde=80
@@ -157,7 +150,7 @@ function drawOutlines(shapes){
     return outlines
 }
 function drawGeoMap(){
-    let shapes=drawGeoSVG(geojson)
+    let shapes=drawGeoSVG(geojson3)
     let outlines=drawOutlines(shapes)
     drawProvince(shapes,outlines)
 }
@@ -252,7 +245,7 @@ function handleRayCastClick(event){
 }
 window.onload=init
 // $.ajax({
-//     url:'js/geojson.json',
+//     url:'js/beijing.json',
 //     success:function(data){
 //         console.log(data)
 //         geojson=data
