@@ -1,0 +1,26 @@
+window.data={
+    nodeindex:{
+        'first':[
+            {nodecode:'PR1',nodename:'e'},
+           
+        ],
+        'scend':[
+            {nodecode:'PR2',nodename:'e'},
+            {nodecode:'PR3',nodename:'e'},
+            {nodecode:'PR4',nodename:'e'},
+            {nodecode:'PR5',nodename:'e'},
+            {nodecode:'PR6',nodename:'e'},
+            {nodecode:'PR7',nodename:'e'},
+            {nodecode:'PR8',nodename:'e'},
+        ]
+    },
+    lineArray:[
+        {linestart:'PR1',lineend:'PR2',linename:'a'},
+        {linestart:'PR1',lineend:'PR3',linename:'a'},
+        {linestart:'PR1',lineend:'PR4',linename:'a'},
+        {linestart:'PR1',lineend:'PR5',linename:'a'},
+        {linestart:'PR1',lineend:'PR6',linename:'a'},
+        {linestart:'PR1',lineend:'PR7',linename:'a'},
+        {linestart:'PR1',lineend:'PR8',linename:'a'},
+    ]
+}
