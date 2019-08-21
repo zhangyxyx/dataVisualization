@@ -89,7 +89,14 @@ function main(){
         var l2=nodeJson[data.result.linearray[i]['lineend']]
         line(l1,l2)
     }
+    window.addEventListener("dblclick", onDocumentMouseMove, false)
    
+}
+var projector = new THREE.Projector(); 
+function onDocumentMouseMove(event){
+    event.preventDefault(); 
+    alert('点击事件发生')
+    console.log(event)
 }
 function axis(){
     var axesHelper = new THREE.AxesHelper( 150 );
