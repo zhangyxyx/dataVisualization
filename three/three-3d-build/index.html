@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+     body{
+            font-family: Monospace;
+            background: #f0f0f0;
+            margin: 0px;
+            overflow: hidden;
+        }
+    
+    </style>
+</head>
+<body>
+    <div id="webgl"></div>
+<script type="text/javascript" src="./js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="./js/three.js"></script>
+<script src="./js/OrbitControls.js"></script>
+<script src="./js/stats.js"></script>
+<script src="./js/dat.gui.min.js"></script>
+
+<script type="text/javascript"> 
+const MATERIAL_COLR='rgb(120,120,120)'
+
+init()
+function init(){
+    let scene=new THREE.Scene()
+    let stats=new Stats()
+    document.body.appendChild(stats.dom)
+
+    let clock=new THREE.Clock()
+    let gui=new dat.GUI()
+
+    let axesHelper=new THREE.AxesHelper(500)
+    let gridHelper=new THREE.GridHelper(100,100)
+
+    scene.add(axesHelper)
+    scene.add(gridHelper)
+
+    let ground1=getGroundFront()
+    let ground2=getGroundBeind()
+    scene.add(ground1)
+    scene.add(ground2)
+
+    let spotLight=getSpotLight(1,2)
+    spotLight.position.set(100,100,80)
+    scene.add(spotLight)
+
+    let camera=new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight,1,1000)
+    camera.position.set(0,30,90)
+    camera.lookAt(new THREE.Vector3(0,0,0))
+
+    let renderer=new THREE.WebGLRenderer()
+    renderer.setClearColor(MATERIAL_COLR)
+    renderer.shadowMap.enabled=true
+    renderer.shadowMap.type=THREE.PCFShadoeMap;
+    renderer.setSize(window.innerWidth,window.innerHeight)
+    document.getElementById('webgl').appendChild(renderer.domElement)
+
+    let controls=new THREE.OrbitControls(camera,renderer.domElement)
+
+    update(renderer,scene,camera,controls,stats)
+}
+function getSpotLight(intensity){
+    let light=new THREE.PointLight(0xfffff,intensity)
+    light.castShadow=true
+    light.receiveShadow=true
+    light.shadow.bias=0.001
+    light.shadow.mapSize.width=2048
+    light.shadow.mapSize.height=2048
+    return light
+}
+
+function getGroundBeind(){
+    let shape=new THREE.Shape()
+    shape.moveTo(45,100)
+    shape.lineTo(50,100)
+    shape.lineTo(50,0)
+    shape.lineTo(-50,0)
+    shape.lineTo(-50,60)
+    shape.bezierCurveTo(5,15,15,5,45,100)
+    let extrudeGeometry=new THREE.ExtrudeGeometry(shape,{
+        depth:3,
+        steps:2,
+        bevethickness:0,
+        bevelSize:1
+    })
+    let material=new THREE.MeshLambertMaterial({color:'gray'})
+    let mesh=new THREE.Mesh(extrudeGeometry,material)
+    mesh.receiveShadow=true;
+    mesh.rotation.x=Math.PI+Math.PI/2
+    mesh.rotation.y=Math.PI
+    mesh.position.set(0,0,50)
+    return mesh
+}
+function getGroundFront(){
+    let shape=new THREE.Shape()
+    shape.moveTo(50,0)
+    shape.lineTo(-25,0)
+    shape.quadraticCurveTo(-10,107,50,15)
+    let extrudeGeometry=new THREE.ExtrudeGeometry(shape,{
+        depath:3,
+        steps:2,
+        bevelthickness:0,
+        bevelSize:1,
+    })
+    let material=new THREE.MeshLambertMaterial({color:'#666'})
+    let mesh=new THREE.Mesh(extrudeGeometry,material)
+    mesh.receiveShadow=true;
+    mesh.rotation.x=Math.PI/2;
+    mesh.position.set(0,0,-50)
+    return mesh
+}
+
+function update(renderer,scene,camera,controls,stats){
+    renderer.render(scene,camera)
+    stats.update()
+    renderer.render(scene,camera)
+    requestAnimationFrame(function(){
+        update(renderer,scene,camera,controls,stats)
+    })
+}
+
+</script>
+</body>
+</html>
