@@ -28,7 +28,7 @@ const MATERIAL_COLR='rgb(120,120,120)'
 
 
 let jinmaoTower =getjinmaoTower(18,11,-20)
-let culture=getCulture(18,6,-20)
+let culture=getCulture(0,0,0)
 init()
 function init(){
     let scene=new THREE.Scene()
@@ -131,22 +131,36 @@ function update(renderer,scene,camera,controls,stats){
 //
 function getCulture(x,y,z){
     let Culture=new THREE.Object3D() 
-    // var verticesOfCube=[
-    //     18,6,-20,
-    //     18,6,-40,
-    //     22,6,-40,
-    //     22,6,-50,
-    //     26,6,-50,
-    //     26,6,-60,
-    //     30,6,-60,
-    //     30,6,-50,
-    //     34,6,-50,
-    //     34,6,-40,
-    //     38,6,-40,
-    //     38,6,-20,
-    // ]
-    let=new THREE.BoxBufferGeometry(1,1,1)
-    //let geometry=new THREE.PolyhedronGeometry(vertices, faces, 10, 0)
+    var verticesOfCube = [
+        1, 0, 1,
+        1, 0, -1,
+        -1, 0, -1,
+        -1, 0, 1,
+        1, 1, 1,
+        1, 1, -1,
+        -1, 1, -1,
+        -1, 1, 1,
+    ];
+    var indicesOfFaces = [
+        0,1,4,
+        5,4,1,
+        5,1,2,
+        6,2,5,
+        2,6,5,
+        7,6,2,
+        7,3,2,
+        7,4,0,
+        7,3,4,
+        6,5,4,
+        6,7,4,
+        3,0,4,
+        6,2,1,
+        6,2,3,
+        6,7,3
+        
+    ];
+
+    let geometry=new THREE.PolyhedronGeometry(verticesOfCube, indicesOfFaces, 10, 0)
     let material=new THREE.MeshBasicMaterial({color:'rgb(5,125,120)'})
     let cube=new THREE.Mesh(geometry,material)
     Culture.add(cube)
