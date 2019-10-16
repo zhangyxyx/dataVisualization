@@ -25,11 +25,14 @@ function clickIndex(){
         $('.regionalIndicator div').removeClass('active')
         $(this).addClass('active')
         $(".main").empty();
-        var html=`<div id="container" class="container"></div>`
-        $(".main").html(html)
+        
         if(mark==='area'){
+            var html=`<div id="containerArea" class="container"></div>`
+            $(".main").html(html)
             renderMap()
         }else{
+            var html=`<div id="containerRoom" class="container"></div>`
+            $(".main").html(html)
             main();
             render();
         }

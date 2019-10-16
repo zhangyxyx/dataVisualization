@@ -2,13 +2,13 @@
 var camera, scene, renderer,orbitControls,clock,delta;
 window.main=function(){
     //创建元素画布
-    container=document.getElementById('container')
+    container=document.getElementById('containerRoom')
     //创建场景
     scene=new THREE.Scene();
     //创建相机
     camera=new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight,1,1000)
-    camera.position.set(300,100,100)//相机位置
-    camera.lookAt(new THREE.Vector3(0,0,0))//相机观看物体的位置
+    camera.position.set(300,100,500)//相机位置
+    camera.lookAt(new THREE.Vector3(0,0,100))//相机观看物体的位置
     //渲染整个场景
     renderer=new THREE.WebGLRenderer({antiakuas:true})
     renderer.setClearColor(new THREE.Color(0x000000),1)//整个画布的背景颜色
@@ -30,22 +30,18 @@ window.main=function(){
     spotLight.position.set(200,160,85)
     spotLight.castShadow=true
     scene.add(spotLight)
+
+    var threeOnEvent = new THREE.onEvent(scene,camera);
+
     plane()
     wall()
     room()
     //cube()
     //sphere()
     //cylinder()
-    
     var raycaster = new THREE.Raycaster();
     var mouse = new THREE.Vector2();
-    $("#container").click(onMouseClick)
-   
     function onMouseClick( event ) {
-        console.log()
-        if($(event.target).attr('id')==='roomTopo'){
-            return;
-        }
         //通过鼠标点击的位置计算出raycaster所需要的点的位置，以屏幕中心为原点，值的范围为-1到1.
         mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
         mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
@@ -53,24 +49,15 @@ window.main=function(){
         raycaster.setFromCamera( mouse, camera );
         // 获取raycaster直线和所有模型相交的数组集合
         var intersects = raycaster.intersectObjects( scene.children );
-        console.log(intersects);
-        //将所有的相交的模型的颜色设置为红色，如果只需要将第一个触发事件，那就数组的第一个模型改变颜色即可
-        // for ( var i = 0; i < intersects.length; i++ ) {
-        //     //intersects[ i ].object.material.color.set( 0xff0000 );
-           
-        // }
-        var opt = {
-            "title":"机房设备",
-            "popWidth":800,
-            "popHeight":400
-        };
-        PopDivHtml(opt);
-        $(".mask").height($(".container").height());
-        var htmlM = '<div id="roomTopo" style="widtH:100%;height:100%"></div>';
-        $(".popcontent").html(htmlM);
-        mainTopo()
-        renderTopo()
+        if(intersects.length>0&&intersects[0].object.geometry.type==="BoxGeometry"){
+            $(".main").empty();
+            var html=`<div id="roomTopo" class="roomTopo"></div>`
+            $(".main").html(html)
+            mainTopo()
+            renderTopo()
+        }
     }
+    window.addEventListener( 'click', onMouseClick, false );
 }
 
 window.render=function(){
@@ -79,7 +66,6 @@ window.render=function(){
     requestAnimationFrame(render);
     renderer.render(scene,camera)
 }
-
 function plane(){
     var planeGeo=new THREE.PlaneGeometry(300,300,100,100)
     var planeMat=new THREE.MeshLambertMaterial({color:0x666666,wireframe:false})
@@ -97,7 +83,11 @@ function wall(){
     var wall1=new THREE.BoxGeometry(150,80,10);//正面
     var wallMesh1=new THREE.Mesh(wall1,material)
     wallMesh1.position.set(0,40,-20)
+    wallMesh1.on('click',function(m) {
+        m.scale.set(2,2,2); // m指向mesh
+    })
     scene.add(wallMesh1)
+    
 
     var wall2=new THREE.BoxGeometry(150,80,10);//反面
     var wallMesh2=new THREE.Mesh(wall2,material)
@@ -140,7 +130,7 @@ function room(){
     var roomMesh1=new THREE.Mesh(room1,material)
     roomMesh1.position.set(-50,40,0)
     scene.add(roomMesh1)
-
+    
     var room2=new THREE.BoxGeometry(20,80,10);//正面
     var roomMesh2=new THREE.Mesh(room2,material)
     roomMesh2.position.set(-50,40,20)
