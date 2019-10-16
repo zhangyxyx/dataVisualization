@@ -1,22 +1,13 @@
 //左边
-window.drawLineOne=function(){
-    var myChart = echarts.init(document.getElementById('thingsLeftEveryOne'));
+window.drawLineOne=function(obj){
+    var myChart = echarts.init(document.getElementById(obj));
     var option = {
-        title: {
-               text: '2019年销售水量和主营业务收入对比',
-               textStyle: {
-                    align: 'center',
-                   color: '#fff',
-                   fontSize: 20,
-               },
-               top: '3%',
-               left: '10%',
-           },
-       backgroundColor: '#0f375f',
+
        grid: {
-           top: "25%",
-           bottom: "10%"
-       },
+            top: "25%",
+            bottom: "20%",
+            left:'20%'
+        },
        tooltip: {
            trigger: "axis",
            axisPointer: {
@@ -27,23 +18,23 @@ window.drawLineOne=function(){
            }
        },
        legend: {
-           data: ["销售水量", "主营业务"],
+           data: ["丢包", "时延"],
            top: "15%",
            textStyle: {
-               color: "#ffffff"
+               color: "#01FCE3"
            }
        },
        xAxis: {
            data: [
-               "当年完成水量",
-               "去年同期水量",
-               "滚动目标值水量",
-               "全年目标值水量",
-               "当年完成金额",
-               "去年同期金额",
-               "滚动目标金额",
-               "全年目标值",
-               
+               "10/01",
+               "10/02",
+               "10/03",
+               "10/04",
+               "10/05",
+               "10/06",
+               "10/07",
+               "10/08",
+               "10/09",
            ],
            axisLine: {
                show: true //隐藏X轴轴线
@@ -54,7 +45,7 @@ window.drawLineOne=function(){
            axisLabel: {
                show: true,
                textStyle: {
-                   color: "#ebf8ac" //X轴文字颜色
+                   color: "#01FCE3" //X轴文字颜色
                }
            },
             axisLine: {
@@ -65,9 +56,9 @@ window.drawLineOne=function(){
        },
        yAxis: [{
                type: "value",
-               name: "亿元",
+               name: "ms",
                nameTextStyle: {
-                   color: "#ebf8ac"
+                   color: "#01FCE3"
                },
                splitLine: {
                    show: false
@@ -79,25 +70,22 @@ window.drawLineOne=function(){
                    show: true
                },
                axisLine: {
-                   show: true
-               },
+                    lineStyle: {
+                        color: '#01FCE3'
+                        }
+                },
                axisLabel: {
-                   show: true,
-                   textStyle: {
-                       color: "#ebf8ac"
-                   }
-               },
-                axisLine: {
-                           lineStyle: {
-                               color: '#FFFFFF'
-                               }
-                       },
+                    show: true,
+                    textStyle: {
+                        color: "#01FCE3" //X轴文字颜色
+                    }
+                },
            },
            {
                type: "value",
-               name: "同比",
+               name: "%",
                nameTextStyle: {
-                   color: "#ebf8ac"
+                   color: "#01FCE3"
                },
                position: "right",
                splitLine: {
@@ -107,59 +95,45 @@ window.drawLineOne=function(){
                    show: false
                },
                axisTick: {
-                   show: false
+                   show: true
                },
                axisLine: {
-                   show: false
-               },
-               axisLabel: {
-                   show: true,
-                   formatter: "{value} %", //右侧Y轴文字显示
-                   textStyle: {
-                       color: "#ebf8ac"
-                   }
-               }
+                lineStyle: {
+                    color: '#01FCE3'
+                    }
+                },
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        color: "#01FCE3" //X轴文字颜色
+                    }
+                },
            },
-           {
-               type: "value",
-               gridIndex: 0,
-               min: 50,
-               max: 100,
-               splitNumber: 8,
-               splitLine: {
-                   show: false
-               },
-               axisLine: {
-                   show: false
-               },
-               axisTick: {
-                   show: false
-               },
-               axisLabel: {
-                   show: false
-               },
-               splitArea: {
-                   show: true,
-                   areaStyle: {
-                       color: ["rgba(250,250,250,0.0)", "rgba(250,250,250,0.05)"]
-                   }
-               }
-           }
+           
+       ],
+       dataZoom:[
+        {
+            type:'inside',
+        }
        ],
        series: [{
-               name: "销售水量",
+               name: "丢包",
                type: "line",
                yAxisIndex: 1, //使用的 y 轴的 index，在单个图表实例中存在多个 y轴的时候有用
                smooth: true, //平滑曲线显示
                showAllSymbol: true, //显示所有图形。
                symbol: "circle", //标记的图形为实心圆
-               symbolSize: 10, //标记的大小
+               symbolSize: 0, //标记的大小
                itemStyle: {
                    //折线拐点标志的样式
-                   color: "#058cff"
+                   normal:{
+                    color:"orange"
+                   }
                },
                lineStyle: {
-                   color: "#058cff"
+                   normal:{
+                        color: "orange"
+                   }
                },
                areaStyle:{
                    color: "rgba(5,140,255, 0.2)"
@@ -167,7 +141,7 @@ window.drawLineOne=function(){
                data: [4.2, 3.8, 4.8, 3.5, 2.9, 2.8, 3, 5]
            },
            {
-               name: "主营业务",
+               name: "时延",
                type: "bar",
                barWidth: 15,
                itemStyle: {
@@ -188,4 +162,107 @@ window.drawLineOne=function(){
        ]
     };
     myChart.setOption(option)
+    echartsArr[obj]=myChart
 }
+window.drawLineTwo=function(obj){
+    var myChart = echarts.init(document.getElementById(obj));
+    var option={
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                lineStyle: {
+                    color: '#57617B'
+                }
+            }
+        },
+        legend: {
+            icon: 'diamond',
+            itemGap: 13,
+            data: ['湿度 %'],
+            top:'10%',
+            left: 'center',
+            textStyle: {
+                fontSize: 12,
+                color: '#F1F1F3'
+            }
+        },
+        grid: {
+            top: "25%",
+            bottom: "20%",
+            left:'20%'
+        },
+        dataZoom:[
+            {
+                type:'inside',
+            }
+        ],
+        xAxis: [{
+            type: 'category',
+            boundaryGap: false,
+
+            axisLine: {
+                lineStyle: {
+                    color: '#01FCE3'
+                }
+            },
+            data: ['1', '2', '3', '4', '5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'],
+        }],
+        yAxis: [{
+            type: 'value',
+            axisTick: {
+                show: false
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#01FCE3'
+                }
+            },
+            axisLabel: {
+                margin: 10,
+                textStyle: {
+                    color: "#01FCE3",
+                    fontSize: '12',
+                }
+            },
+            axisTick:{
+                show:true
+            },
+            splitLine: {
+                lineStyle: {
+                    color: "rgba(255,255,255,0.1)",
+                }
+            }
+        }],
+        series: [{
+            name: '湿度 %',
+            type: 'line',
+            smooth: true,
+            markLine:{ //最大值和最小值
+            data:[
+            {
+                type:"min",name:"最小值"
+        
+            },
+            {
+                type:"max",name:"最大值"
+            }]
+            },
+            lineStyle: {
+                normal: {
+                    width: 1
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color:'#00A1EA'
+                }
+            },
+            data: [50,52,52,52,52,58,52,55,44,52,52,52,33,52,52,52,20,52,52,52,52,52,55,52,52,23,52,52,52,52,52]
+        },  ]
+    
+    }
+    myChart.setOption(option)
+    echartsArr[obj]=myChart
+}
+//右边
+

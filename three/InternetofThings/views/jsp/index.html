@@ -5,31 +5,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>物联网</title>
-    <link rel="stylesheet" href="assets/css/common.css"></script>
-    <link rel="stylesheet" href="assets/module/index/css/index.css"></script>
+    <title></title>
+    <link rel="stylesheet" href="/InternetofThings/assets/css/common.css"></script>
+    <link rel="stylesheet" href="/InternetofThings/assets/module/index/css/index.css"></script>
 </head>
 <body>
-    <div class="main"></div>
+    <div class="title">中国电信CTGNET</div>
     <div class="thingsLeft">
-        <div class="thingsLeftEvery" id="thingsLeftEveryOne"></div>
-        <div class="thingsLeftEvery" id="thingsLeftEveryTwo"></div>
+        <div class="thingsparent"><div class="thingsLeftEvery" id="thingsLeftEveryOne"></div></div>
+        <div class="thingsparent"><div class="thingsLeftEvery" id="thingsLeftEveryTwo"></div></div>
     </div>
     <div class="thingsRight">
-        <div class="thingsRightEvery"></div>
-        <div class="thingsRightEvery"></div>
+        <div class="thingsparent"><div class="thingsRightEvery" id="thingsRightEveryOne"></div></div>
+        <div class="thingsparent"><div class="thingsRightEvery" id="thingsRightEveryTwo"></div></div> 
     </div>
     <div class="thingsBottom">
-        <div class="thingsBottomEvery"></div>
-        <div class="thingsBottomEvery"></div>
-        <div class="thingsBottomEvery"></div>
+        <div class="thingsparent"><div class="thingsBottomEvery" id="thingsBottomEveryOne"></div></div>
+        <div class="thingsparent"><div class="thingsBottomEvery" id="thingsBottomEveryTwo"></div></div>
+        <div class="thingsparent"><div class="thingsBottomEvery" id="thingsBottomEveryThree"></div></div>
     </div>
-    <script src="assets/lib/jquery/jquery-1.9.1.min.js"></script>
+    <div class="main">
+        <div id="container" class="container"></div>
+    </div>
+
+    <div class="regionalIndicator">
+        <div class="area active" data-mark="area">区域</div>
+        <div class="room" data-mark="room">机房</div>
+    </div>
+    <script src="/InternetofThings/assets/lib/jquery/jquery-1.9.1.min.js"></script>
+    <script src="/InternetofThings/assets/js/PopDivHtml.js"></script>
     <!-- echarts -->
-    <script src="assets/lib/echarts3/echarts.js"></script>
+    <script src="/InternetofThings/assets/lib/echarts3/echarts.js"></script>
+    <!-- 地图 -->
+    <script src="//webapi.amap.com/maps?v=1.4.15&key=d937e71a6393cace54102a4f22b418fd&"></script>
+    <script src="//webapi.amap.com/loca?v=1.3.0&key=d937e71a6393cace54102a4f22b418fd"></script>
+    <script src="https://a.amap.com/Loca/static/mock/wjarea.js"></script>
+    <script src="/InternetofThings/assets/module/index/js/map.js"></script>
+    <!-- three -->
+    <script src="/InternetofThings/assets/lib/three/three.js"></script>
+    <script src="/InternetofThings/assets/lib/three/OrbitControls.js"></script>
+    <script src="/InternetofThings/assets/lib/three/threeBSP.js"></script>
+    <!---topo-->
+    <script src="/InternetofThings/assets/module/index/js/raphael/raphael.min.js"></script>
+    <script src="/InternetofThings/assets/module/index/js/raphael/raphael.graph.js"></script>
+    <script src="/InternetofThings/assets/module/index/js/topo/data.js"></script>
+    <script src="/InternetofThings/assets/module/index/js/topo/topo-common.js"></script>
+    <script src="/InternetofThings/assets/module/index/js/topo/topo.js"></script>
+    <script src="/InternetofThings/assets/module/index/js/topo/3d-topo.js"></script>
     <!-- 主页面 -->
-    <script src="assets/module/index/js/drawEcharts.js"></script>
-    <script src="assets/module/index/js/index.js"></script>
+    <script src="/InternetofThings/assets/module/index/js/room.js"></script>
+    <script src="/InternetofThings/assets/module/index/js/drawEcharts.js"></script>
+    <script src="/InternetofThings/assets/module/index/js/index.js"></script>
     
 </body>
 </html>
