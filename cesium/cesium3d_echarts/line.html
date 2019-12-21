@@ -24,7 +24,7 @@
   </head>
   <body>
     <div id="cesium-logo"></div>
-    <div id="cesiumContainer"></div>
+    <div id="cesiumContainer" style="background:url(./data/bg.png)"></div>
 
     <script>
     var viewer = new Cesium.Viewer('cesiumContainer', {
@@ -32,16 +32,26 @@
       timeline: false,
       animation: false,
       fullscreenButton: false,
-      imageryProvider : Cesium.createTileMapServiceImageryProvider({
-        url : Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
+      imageryProvider : Cesium.createWorldImagery({
+        style : Cesium.IonWorldImageryStyle.AERIAL_WITH_LABELS
       }),
       baseLayerPicker : false,
       geocoder: false,
-      // sceneMode: Cesium.SceneMode.COLUMBUS_VIEW,
       creditContainer: 'cesium-logo'
     })
 
     viewer.extend(Cesium.viewerCesiumNavigationMixin, {})
+    var layers = viewer.scene.imageryLayers;
+    var blackMarble = layers.addImageryProvider(new Cesium.IonImageryProvider({ assetId: 3812 }));
+
+    blackMarble.alpha = 0.5;
+
+    blackMarble.brightness = 2.0;
+
+    layers.addImageryProvider(new Cesium.SingleTileImageryProvider({
+        url : './data/echart.jpg',
+        rectangle : Cesium.Rectangle.fromDegrees(-75.0, 28.0, -67.0, 29.75)
+    }));
     //旋转
     viewer.clock.multiplier = 200;//速度
     viewer.clock.shouldAnimate = true;
@@ -1999,7 +2009,7 @@
                 show: true, 
                 position: 'right', 
                 formatter: function(a){
-                  console.log(a.name)
+                 
                   return a.name
                 }  
             },
